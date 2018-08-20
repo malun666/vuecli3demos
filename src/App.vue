@@ -38,12 +38,13 @@ export default {
     };
   },
   created() {
-    axios.get("http://localhost:12345/users").then(res => {
-      this.userList = res.data;
-      // this.userList.push(...res.data);
-    });
-
-    // .catch(e => {});
+    axios
+      .get("http://localhost:12345/users")
+      .then(res => {
+        this.userList = res.data;
+        // this.userList.push(...res.data);
+      })
+      .catch(e => {}); // eslint-disable-line
   },
   components: {
     demo: Demo
