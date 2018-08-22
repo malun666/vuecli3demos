@@ -14,15 +14,19 @@
         </tr>
       </thead>
       <tbody>
+      <!--
         <tr v-for="(item, index) of userList" :key="index">
           <td>{{item.id}}</td>
           <td>{{item.name}}</td>
           <td>{{item.phone}}</td>
           <td>{{item.address}}</td>
           <td>
-            <a @click="delUser(item.id)" href="javascript:">删除</a>
+            <a @click="delUser(item.id)" href="javascript:">删除</a>&nbsp;
+            <a @click="delUser(item.id)" href="javascript:">编辑</a>
           </td>
         </tr>
+        -->
+        <row v-for="(item, index) of userList" :propsArray="['id', 'name', 'phone', 'address']" @update:user="saveUser" @delete:id="delUser($event)" :key="index" :rowData="item"></row>
       </tbody>
     </table>
     <el-dialog title="添加用户" :visible.sync="addDialogVisible" width="60%">
@@ -53,6 +57,7 @@ import Demo from "./components/Demo";
 import "element-ui/lib/theme-chalk/index.css";
 import axios from "axios"; // ajax
 import { Message, MessageBox } from "element-ui";
+import Row from "./components/Row";
 
 export default {
   name: "app",
@@ -70,6 +75,10 @@ export default {
     };
   },
   methods: {
+    saveUser(e) {
+      let index = this.userList.findIndex(item => e.id === item.id);
+      this.userList.splice(index, 1, e);
+    },
     submitAdd() {
       this.id = Date.now();
       axios
@@ -119,7 +128,8 @@ export default {
       }); // eslint-disable-line
   },
   components: {
-    demo: Demo
+    demo: Demo,
+    row: Row
   }
 };
 </script>
