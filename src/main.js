@@ -5,9 +5,10 @@ import store from "./store";
 import './plugins/element.js'
 
 Vue.config.productionTip = false;
-
+// #region sdfsd
 new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+// #endregion

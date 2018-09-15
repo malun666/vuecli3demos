@@ -1,6 +1,18 @@
 <template>
   <div id="app">
     <h1>用户列表</h1>
+    <div>
+      <input type="button" value="显示/隐藏" @click="show=!show">
+      <transition name="show-box">
+        <div v-show="show">你好啊</div>
+      </transition>
+      <transition
+        enter-active-class="animated fadeIn"
+        leave-active-class="animated fadeOut"
+      >
+        <div v-show="show">animate</div>
+      </transition>
+    </div>
     <el-button @click="showAddDialog" type="success">添加用户</el-button>
     <hr>
     <table class="table is-striped is-bordered">
@@ -63,6 +75,7 @@ export default {
   name: "app",
   data() {
     return {
+      show: true,
       age: 19,
       userList: [],
       addDialogVisible: false,
@@ -136,6 +149,32 @@ export default {
 
 <style lang="scss">
 $red: red;
+.show-box-enter {
+  opacity: 0.3;
+  font-size: 100px;
+}
+.show-box-enter-active {
+  opacity: 0.8;
+  font-size: 50px;
+  transition: all 0.5s ease;
+}
+.show-box-enter-to {
+  opacity: 1;
+  font-size: 20px;
+}
+.show-box-leave {
+  opacity: 1;
+  font-size: 30px;
+}
+.show-box-leave-active {
+  opacity: 0.5;
+  font-size: 70px;
+  transition: all 1.5s linear;
+}
+.show-box-leave-to {
+  opacity: 0;
+  font-size: 100px;
+}
 #app {
   p {
     color: $red;
